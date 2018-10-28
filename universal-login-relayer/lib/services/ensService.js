@@ -7,7 +7,8 @@ class ENSService {
   }
 
   findRegistrar(ensName) {
-    const [, domain] = this.get2ndLevelDomainForm(ensName);
+      const [, domain] = this.get2ndLevelDomainForm(ensName);
+      console.log("second level domain: " + domain);
     return this.ensRegistrars[domain];
   }
 

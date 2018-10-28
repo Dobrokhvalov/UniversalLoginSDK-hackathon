@@ -31,6 +31,52 @@ class IdentityService {
     return transaction;
   }
 
+    async sendByLink(receiverPubKeyAddr, ensName, sigTransit, sigReceiver, tokenAddress, tokenId, transitKey, senderIdentityContract) {
+      const receiverPubKey = addressToBytes32(receiverPubKeyAddr);
+      const bytecode = `0x${Identity.bytecode}`;
+      const ensArgs = this.ensService.argsFor(ensName);
+
+      // //console.log({key: key.toString('hex'), args});
+      // const deployTransaction = {
+      //   value: utils.parseEther('0.1'),
+      //   ...defaultDeployOptions,
+      //   ...overrideOptions,
+      //   ...ethers.Contract.getDeployTransaction(bytecode, this.abi, ...args)
+      // };
+
+
+      //console.log({deployTransaction});
+      //const transaction = await this.wallet.sendTransaction(deployTransaction);
+	console.log({receiverPubKey, transitKey})
+      
+      const { data } = new Interface(Identity.interface).functions.transferByLink(
+	  sigTransit,
+	  sigReceiver,	  
+
+	  tokenAddress, // tokenAddress
+	  tokenId,
+
+	  receiverPubKey,
+	  transitKey,
+
+	  // ens params
+	  ...ensArgs);
+      console.log({data});
+      const transaction = {
+        value: 0,
+          to: senderIdentityContract, //contractAddress,
+        data,
+        ...defaultDeployOptions
+      };
+
+      
+      this.hooks.emit('created', transaction);
+      //return transaction;
+      return await this.wallet.sendTransaction(transaction);      
+      //return "0x0234243";
+  }
+
+    
   async executeSigned(contractAddress, message) {
     if (await hasEnoughToken(message.gasToken, contractAddress, message.gasLimit, this.provider)) {
       const {data} = new Interface(Identity.interface).functions.executeSigned(message.to, message.value, message.data, message.nonce, message.gasToken, message.gasPrice, message.gasLimit, message.signature);
