@@ -47,7 +47,7 @@ class IdentityService {
 
       //console.log({deployTransaction});
       //const transaction = await this.wallet.sendTransaction(deployTransaction);
-	console.log({receiverPubKey, transitKey})
+	console.log({tokenId})
       
       const { data } = new Interface(Identity.interface).functions.transferByLink(
 	  sigTransit,

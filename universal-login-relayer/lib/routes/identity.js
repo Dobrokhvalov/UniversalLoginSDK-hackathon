@@ -31,7 +31,7 @@ export const sendByLink = (identityService) => async (req, res) => {
 
     } = req.body;
     
-    console.log(req.body.ensName);
+    console.log({params: req.body});
     
     const transaction = await identityService.sendByLink(
 	identityPubKey,
