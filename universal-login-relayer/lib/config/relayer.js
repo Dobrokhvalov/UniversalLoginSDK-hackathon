@@ -13,7 +13,7 @@ require('dotenv').config();
 module.exports = Object.freeze({
   jsonRpcUrl: process.env.JSON_RPC_URL || "https://ropsten.infura.io",
   port: process.env.PORT || 3005,
-  privateKey: process.env.PRIVATE_KEY || "0xB16A375B58DD38D469B8144833CF080DA5E3DDE71733D135E4E348192FDA8067",
+  privateKey: process.env.PRIVATE_KEY,
   chainSpec: {
     ensAddress: process.env.ENS_ADDRESS || "0x62d6c93df120fca09a08258f3a644b5059aa12f0",
     chainId: 3
