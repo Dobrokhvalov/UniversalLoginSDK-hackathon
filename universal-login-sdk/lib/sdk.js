@@ -1,6 +1,6 @@
 import ethers, {utils, Interface} from 'ethers';
-import Identity from 'universal-login-contracts/build/Identity';
-import {MANAGEMENT_KEY, ECDSA_TYPE, ACTION_KEY} from 'universal-login-contracts';
+import Identity from 'universal-login-monorepo/universal-login-contracts/build/Identity';
+import {MANAGEMENT_KEY, ECDSA_TYPE, ACTION_KEY} from 'universal-login-monorepo/universal-login-contracts';
 import {addressToBytes32, waitForContractDeploy, messageSignature, waitForTransactionReceipt} from './utils/utils';
 import {resolveName, codeEqual} from './utils/ethereum';
 import RelayerObserver from './observers/RelayerObserver';
